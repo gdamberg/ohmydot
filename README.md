@@ -2,7 +2,6 @@
 
 My personal dotfiles. A work in progress...
 
-
 ## credits
 
 Uses a git bare directory, idea stolen from this blogpost: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/
