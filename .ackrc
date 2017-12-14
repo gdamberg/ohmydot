@@ -1,0 +1,17 @@
+# Ignore idea files
+--ignore-dir=.idea
+--ignore-file=match:\.iml$
+
+# Ignore maven stuff
+--ignore-dir=target
+--ignore-file=match:\.versionsBackup$
+
+# Use "less -r" as my pager
+--pager=less -r
+
+#filetypes
+--type-set=pom:is:pom.xml
+--type-set=cfg:ext:cfg,properties
+
+# sort files
+--sort-files
