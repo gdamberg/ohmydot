@@ -1,0 +1,25 @@
+[core]
+	editor = code
+[color]
+    ui = auto
+[push]
+    default = simple
+
+[alias]
+    branches = branch -a
+    tags = tag
+    stashes = stash list
+    remotes = remote -v
+    unstage = reset -q HEAD --
+    discard = checkout --
+	revert = checkout --
+    amend = commit --amend
+    giveup = !git reset --hard HEAD && git clean -d -f
+    precommit = diff --cached --diff-algorithm=minimal -w
+    unstash = stash pop
+    last = show -w
+    st = status
+
+[user]
+	email = gdamberg@outlook.com
+	name = Göran Damberg
