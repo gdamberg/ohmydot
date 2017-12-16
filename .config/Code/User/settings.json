@@ -1,0 +1,7 @@
+{
+    "editor.fontSize": 16,
+    "workbench.colorTheme": "Solarized Dark",
+    "files.trimTrailingWhitespace": false,
+    "files.autoSave": "onFocusChange",
+    "terminal.integrated.fontSize": 16
+}
