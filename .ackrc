@@ -7,11 +7,15 @@
 --ignore-file=match:\.versionsBackup$
 
 # Use "less -r" as my pager
---pager=less -r
+--pager=less
 
 #filetypes
 --type-set=pom:is:pom.xml
 --type-set=cfg:ext:cfg,properties
+--type-set=doc:ext:txt,md,readme
+--type-set=jenkinsfile:is:Jenkinsfile
+--type-set=dockerfile:is:Dockerfile
+--type-set=ftl:ext:ftl
 
 # sort files
 --sort-files
