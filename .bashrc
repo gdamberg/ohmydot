@@ -9,7 +9,7 @@ case $- in
 esac
 
 # load all *.bashrc files in .bashrc.d
-for file in ~/.bashrc.d/*.bashrc;
+for file in $HOME/.bashrc.d/*.bashrc;
 do
     source $file
 done
