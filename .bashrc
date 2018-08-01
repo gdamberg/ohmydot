@@ -25,3 +25,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
+# add  $HOME/bin to path if it exists
+if [ -d $HOME/bin ]; then
+  export PATH="$HOME/bin:$PATH"
+fi
+
+# init sdkman if installed
+if [ -d $HOME/.sdkman ]; then
+  export SDKMAN_DIR="$HOME/.sdkman"
+  [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+fi
