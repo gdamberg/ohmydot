@@ -1,17 +1,4 @@
 {
-    "gitlens.advanced.messages": {
-        "suppressCommitHasNoPreviousCommitWarning": false,
-        "suppressCommitNotFoundWarning": false,
-        "suppressFileNotUnderSourceControlWarning": false,
-        "suppressGitVersionWarning": false,
-        "suppressLineUncommittedWarning": false,
-        "suppressNoRepositoryWarning": false,
-        "suppressResultsExplorerNotice": false,
-        "suppressShowKeyBindingsNotice": true
-    },
-    "workbench.iconTheme": "vscode-icons",
-    "gitlens.explorers.avatars": false,
-    "gitlens.historyExplorer.enabled": false,
     "workbench.colorTheme": "Default Light+",
     "editor.fontSize": 16,
     "markdown.preview.fontSize": 16,
@@ -19,7 +6,7 @@
     "files.autoSave": "onFocusChange",
     "files.trimTrailingWhitespace": true,
     "editor.multiCursorModifier": "ctrlCmd",
-    "docker.defaultRegistry": "docker.dch.got.telia.se",
+    //"docker.defaultRegistry": "docker.dch.got.telia.se",
     "window.zoomLevel": 0,
     "git.autofetch": true,
 
