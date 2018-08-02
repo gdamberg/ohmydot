@@ -8,12 +8,6 @@ case $- in
       *) return;;
 esac
 
-# load all *.bashrc files in .bashrc.d
-for file in $HOME/.bashrc.d/*.bashrc;
-do
-    source $file
-done
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -35,3 +29,9 @@ if [ -d $HOME/.sdkman ]; then
   export SDKMAN_DIR="$HOME/.sdkman"
   [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 fi
+
+# load all *.bashrc files in .bashrc.d
+for file in $HOME/.bashrc.d/*.bashrc;
+do
+    source $file
+done
