@@ -1,12 +1,11 @@
 # colors and stuff
-DIRTY="\001$RED\002"
-READY="\001$YELLOW\002"
-CLEAN="\001$CYAN\002"
-PATH_COLOR=$BLUE$BOLD
-PROMPT_COLOR=$NO_COLOUR$CYAN
+DIRTY="\001$(fgcolor 168)\002" # red
+READY="\001$(fgcolor 11)\002" # yellow
+CLEAN="\001$(fgcolor 30)\002" # green
+PATH_COLOR="$(fgcolor 75)" # blueish
 PROMPT="»"
-STATUS_OK="✔"
-STATUS_ERROR="✘"
+STATUS_OK="\001$(fgcolor 35)\002✔"
+STATUS_ERROR="\001$(fgcolor 202)\002✘"
 
 # git prompt
 git_prompt() {
@@ -56,12 +55,10 @@ git_prompt() {
 }
 
 exit_symbol() {
-    if [ $? != 0 ]; then
-        EXIT="$DIRTY$STATUS_ERROR "
-        #✗
+    if [ $? -gt 0 ]; then
+        EXIT="$STATUS_ERROR "
     else
-        EXIT="$CLEAN$STATUS_OK "
-        #✓
+        EXIT="$STATUS_OK "
     fi
     printf "$EXIT"
 }
@@ -72,7 +69,8 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 
-PS1='$(exit_symbol)$(git_prompt)\[$PATH_COLOR\]\W \[$PROMPT_COLOR\]$PROMPT \[$NO_COLOUR\]'
+PS1='$(exit_symbol)$(git_prompt)\[$PATH_COLOR\]\W $PROMPT \[$NO_COLOUR\]'
+
 
 
 # If this is an xterm set the title to user@host:dir

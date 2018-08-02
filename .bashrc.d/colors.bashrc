@@ -11,66 +11,60 @@ fi
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
-# colored GCC warnings and errors
-#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+# set color of text
+# used in strings with ech, eg: `echo -e "$(fgcolor 121)$(bgcolor 19)Hello world!"`
+# reset color after usage or it will mess up the prompt...
+function fgcolor() {
+  if [ ! -z "$1" ]
+  then
+    echo "$(tput setaf $1)"
+  fi
+}
+# set color of background
+function bgcolor() {
+  if [ ! -z "$1" ]
+  then
+    echo "$(tput setab $1)"
+  fi
+}
+
 
 # COLORS
-export BLACK="$(tput setaf 0)"
-export RED="$(tput setaf 1)"
-export GREEN="$(tput setaf 2)"
-export YELLOW="$(tput setaf 3)"
-export BLUE="$(tput setaf 4)"
-export PURPLE="$(tput setaf 5)"
-export CYAN="$(tput setaf 6)"
-export WHITE="$(tput setaf 7)$(tput bold)"
-export GRAY="$(tput setaf 7)"
-
-export BG_BLACK="$(tput setab 0)"
-export BG_RED="$(tput setab 1)"
-export BG_GREEN="$(tput setab 2)"
-export BG_YELLOW="$(tput setab 3)"
-export BG_BLUE="$(tput setab 4)"
-export BG_PURPLE="$(tput setab 5)"
-export BG_CYAN="$(tput setab 6)"
-export BG_WHITE="$(tput setab 7)$(tput bold)"
-export BG_GRAY="$(tput setab 7)"
+export RED="$(fgcolor 168)"
+export YELLOW="$(fgcolor 120)"
+export BLUE="$(fgcolor 4)"
+export CYAN="$(fgcolor 75)"
 
 export NO_COLOUR="$(tput sgr0)"
 export REVERSE="$(tput rev)"
 export BOLD="$(tput bold)"
 export UNDERLINE="$(tput smul)"
 
-function colors() {
-  echo -e $BLACK           "black             " $REVERSE "reverse" $NO_COLOUR
-  echo -e $RED             "red               " $REVERSE "reverse" $NO_COLOUR
-  echo -e $GREEN           "green             " $REVERSE "reverse" $NO_COLOUR
-  echo -e $YELLOW          "yellow            " $REVERSE "reverse" $NO_COLOUR
-  echo -e $BLUE            "blue              " $REVERSE "reverse" $NO_COLOUR
-  echo -e $PURPLE          "purple            " $REVERSE "reverse" $NO_COLOUR
-  echo -e $CYAN            "cyan              " $REVERSE "reverse" $NO_COLOUR
-  echo -e $WHITE           "white             " $REVERSE "reverse" $NO_COLOUR
-  echo -e $GRAY            "gray              " $REVERSE "reverse" $NO_COLOUR
+function _colorgrid( ) {
+    iter=0
+    while [ $iter -lt 256 ]
+    do
+        # only print four columns in first row for astetic reasons"
+        if [[ $iter -gt 0 ]]
+        then
+            echo -en "$(tput setaf $iter)███ $iter     "
+            iter=$[$iter+1]
+            echo -en "$(tput setaf $iter)███ $iter     "
+            iter=$[$iter+1]
+        fi
+        echo -en "$(tput setaf $iter)███ $iter     "
+        iter=$[$iter+1]
+        echo -en "$(tput setaf $iter)███ $iter     "
+        iter=$[$iter+1]
+        echo -en "$(tput setaf $iter)███ $iter     "
+        iter=$[$iter+1]
+        echo -en "$(tput setaf $iter)███ $iter     "
 
-  echo -e $BOLD$BLACK      "bold black        " $REVERSE "reverse" $NO_COLOUR
-  echo -e $BOLD$RED        "bold red          " $REVERSE "reverse" $NO_COLOUR
-  echo -e $BOLD$GREEN      "bold green        " $REVERSE "reverse" $NO_COLOUR
-  echo -e $BOLD$YELLOW     "bold yellow       " $REVERSE "reverse" $NO_COLOUR
-  echo -e $BOLD$BLUE       "bold blue         " $REVERSE "reverse" $NO_COLOUR
-  echo -e $BOLD$PURPLE     "bold purple       " $REVERSE "reverse" $NO_COLOUR
-  echo -e $BOLD$CYAN       "bold cyan         " $REVERSE "reverse" $NO_COLOUR
-  echo -e $BOLD$WHITE      "bold white        " $REVERSE "reverse" $NO_COLOUR
-
-  echo -e $BG_BLACK  "black            "$NO_COLOUR
-  echo -e $BG_RED    "red              "$NO_COLOUR
-  echo -e $BG_GREEN  "green            "$NO_COLOUR
-  echo -e $BG_YELLOW "yellow           "$NO_COLOUR
-  echo -e $BG_BLUE   "blue             "$NO_COLOUR
-  echo -e $BG_PURPLE "purple           "$NO_COLOUR
-  echo -e $BG_CYAN   "cyan             "$NO_COLOUR
-  echo -e $BG_WHITE  "white            "$NO_COLOUR
-  echo -e $BG_GRAY   "gray             "$NO_COLOUR
-
-  echo -e " default           " $REVERSE "reverse" $NO_COLOUR
+        iter=$[$iter+1]
+        echo -e $NO_COLOUR
+    done
 }
 
-
+function colors() {
+  _colorgrid | column -t
+}
