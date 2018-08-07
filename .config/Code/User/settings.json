@@ -1,12 +1,14 @@
 {
-    "editor.fontSize": 16,
-    "markdown.preview.fontSize": 16,
-    "terminal.integrated.fontSize": 16,
+    "editor.fontSize": 20,
+    "markdown.preview.fontSize": 20,
+    "terminal.integrated.fontSize": 18,
     "files.autoSave": "onFocusChange",
     "files.trimTrailingWhitespace": true,
     "editor.multiCursorModifier": "ctrlCmd",
-    //"docker.defaultRegistry": "docker.dch.got.telia.se",
+    "docker.defaultRegistry": "docker.dch.got.telia.se",
     "window.zoomLevel": 0,
     "git.autofetch": true,
-
+    "editor.fontFamily": "'Ubuntu Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "workbench.colorTheme": "Default Light+",
+    "workbench.startupEditor": "newUntitledFile",
 }
