@@ -11,4 +11,5 @@
     "editor.fontFamily": "'Ubuntu Mono', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "workbench.colorTheme": "Default Light+",
     "workbench.startupEditor": "newUntitledFile",
+    "breadcrumbs.enabled": true,
 }
