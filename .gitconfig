@@ -1,5 +1,6 @@
 [core]
 	editor = code
+	excludesfile = ~/.gitignore_global
 [color]
     ui = auto
 [push]
