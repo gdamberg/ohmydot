@@ -1,6 +1,8 @@
 # Ignore idea files
 --ignore-dir=.idea
 --ignore-file=match:\.iml$
+# Ignore vs-code files
+--ignore-dir=.history
 
 # Ignore maven stuff
 --ignore-dir=target
