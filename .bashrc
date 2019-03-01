@@ -36,6 +36,6 @@ do
     source $file
 done
 
-if [ -z "$TMUX" ]; then
-    tmux -2 attach -t tmux || tmux -2 new -s tmux
+if [ -f "$HOME/.bashrc_local" ]; then
+  source "$HOME/.bashrc_local"
 fi
