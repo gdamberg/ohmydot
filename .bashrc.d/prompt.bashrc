@@ -3,9 +3,8 @@ DIRTY="\001$(fgcolor 168)\002" # red
 READY="\001$(fgcolor 11)\002" # yellow
 CLEAN="\001$(fgcolor 30)\002" # green
 PATH_COLOR="$(fgcolor 75)" # blueish
-PROMPT="»"
-STATUS_OK="\001$(fgcolor 35)\002✔"
-STATUS_ERROR="\001$(fgcolor 202)\002✘"
+STATUS_OK=""
+STATUS_ERROR="\001$(fgcolor 202)\002☹ "
 
 # git prompt
 git_prompt() {
@@ -63,13 +62,23 @@ exit_symbol() {
     printf "$EXIT"
 }
 
+prompt() {
+    local prompt="➤ "
+    # check if attached to minikube
+    if [[ "$DOCKER_CERT_PATH" == *"minikube"* ]]; then
+        prompt="☸ "
+    fi
+    printf "$prompt"
+
+}
+
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 
-PS1='$(exit_symbol)$(git_prompt)\[$PATH_COLOR\]\W $PROMPT \[$NO_COLOUR\]'
+PS1='$(exit_symbol)$(git_prompt)\[$PATH_COLOR\]\W $(prompt) \[$NO_COLOUR\]'
 
 
 
