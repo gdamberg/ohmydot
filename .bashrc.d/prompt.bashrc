@@ -58,16 +58,17 @@ exit_symbol() {
         EXIT="$STATUS_ERROR "
     else
         EXIT="$STATUS_OK "
+        # check if attached to minikube
+        if [[ "$DOCKER_CERT_PATH" == *"minikube"* ]]; then
+            EXIT="\001$(fgcolor 75)\002☸  "
+        fi
     fi
     printf "$EXIT"
 }
 
 prompt() {
     local prompt="➤ "
-    # check if attached to minikube
-    if [[ "$DOCKER_CERT_PATH" == *"minikube"* ]]; then
-        prompt="☸ "
-    fi
+
     printf "$prompt"
 
 }
