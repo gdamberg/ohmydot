@@ -15,6 +15,12 @@ if [ -e $HOME/.local/bin/aws_completer ]; then
     complete -C '$HOME/.local/bin/aws_completer' aws
 fi
 
+# code completion kubectx/kubens
+if [ -e $HOME/projects/github/kubectx ]; then
+    source $HOME/projects/github/kubectx/completion/kubectx.bash
+    source $HOME/projects/github/kubectx/completion/kubens.bash
+fi
+
 function minikube-attach() {
     eval $(minikube docker-env)
 }
