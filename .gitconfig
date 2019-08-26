@@ -12,6 +12,7 @@
     stashes = stash list
     remotes = remote -v
     unstage = reset -q HEAD --
+    uncommit = reset --soft HEAD^
     discard = checkout --
 	amend = commit --amend
     giveup = !git reset --hard HEAD && git clean -d -f
