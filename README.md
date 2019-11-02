@@ -1,6 +1,6 @@
 # ohmydot
 
-My personal dotfiles. A work in progress... U
+My personal dotfiles. A work in progress...
 
 ## credits
 
@@ -16,7 +16,7 @@ Clone repo into $HOME, and use [stow](https://www.gnu.org/software/stow/) to ins
 ```
 sudo apt install stow
 cd $HOME
-git clone https://github.com/gdamberg/ohmydot.git
+git clone git@github.com:gdamberg/ohmydot.git
 cd ohmydot
 stow ack
 stow bash
