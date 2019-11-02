@@ -1,6 +1,8 @@
 # jenv
-export PATH="$HOME/.jenv/bin:$PATH"
-eval "$(jenv init -)"
+if [ -d $HOME/.jenv ]; then
+  export PATH="$HOME/.jenv/bin:$PATH"
+  eval "$(jenv init -)"
+fi
 # gradle
 export PATH="$PATH:/opt/gradle/current/bin"
 # maven

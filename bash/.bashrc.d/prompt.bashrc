@@ -67,7 +67,10 @@ exit_symbol() {
 }
 
 prompt() {
-    local kubectx="$(kubectl config current-context)"
+    local kubectx=""
+    if hash kubectl 2>/dev/null; then
+        kubectx="$(kubectl config current-context)"
+    fi
     local prompt=
    if [[ "$kubectx" == *"prod"* ]]; then
         prompt="$DIRTY➤ "
