@@ -53,6 +53,8 @@ sudo service procps start
 ```
 
 #### dell xps 15
+
+##### resume after sleep
 Had problems resuming after sleep. This helped:
 https://wiki.archlinux.org/index.php/Dell_XPS_15_9570#Suspend
 
@@ -65,3 +67,9 @@ After modifying grub file:
 ```
 sudo update-grub
 ```
+##### fans going crazy
+In ubuntu 19.10 fans going crazy...
+
+Main offender, Nvidia setting gpu to max performance as default (and resetting this after reboot !)
+
+Add startup application with command: `sh -c '/usr/bin/nvidia-settings -a "[gpu:0]/GpuPowerMizerMode=0"'` to set mode to "adaptive"
