@@ -16,14 +16,15 @@ Clone repo into $HOME, and use [stow](https://www.gnu.org/software/stow/) to ins
 ```
 sudo apt install stow
 cd $HOME
-git clone git@github.com:gdamberg/ohmydot.git
-cd ohmydot
+git clone git@github.com:gdamberg/ohmydot.git .ohmydot
+cd .ohmydot
 stow ack
 stow bash
 stow code
 stow git
 stow tmux
 stow vim
+stow zsh
 ```
 
 Proper install script TBD
