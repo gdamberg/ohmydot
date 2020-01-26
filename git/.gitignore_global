@@ -1,4 +1,7 @@
 .vscode
 .factorypath
 .history
+.project
+.settings
+*.code-workspace
 
