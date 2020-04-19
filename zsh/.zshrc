@@ -76,7 +76,9 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pyenv aws kubectl jump zsh-syntax-highlighting zsh-autosuggestions ibe jenv)
+plugins=(git pyenv aws kubectl jump zsh-syntax-highlighting zsh-autosuggestions ibe jenv golang)
+
+export IBE_HOME=$HOME/Source/itdev/ibe
 
 source $ZSH/oh-my-zsh.sh
 autoload -U compinit && compinit
@@ -112,10 +114,20 @@ alias clipboard="xclip -selection clipboard"
 function mkd() {
   mkdir -p $1 && cd $1
 }
+
+# create a pod with various debug tools available and open interactive shell inside it. deletes pod at exit
+function debug_pod() {
+  kubectl run -i --rm --tty debug --image=praqma/network-multitool --restart=Never -- bash
+}
 alias ohmydot="code $HOME/.ohmydot"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# golang
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/gordam/.sdkman"
