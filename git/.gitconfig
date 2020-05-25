@@ -26,3 +26,6 @@
 
 [include]
     path = ~/.gitconfig_local
+
+[includeIf "gitdir:~/github/"]
+    path = ~/.gitconfig_github
