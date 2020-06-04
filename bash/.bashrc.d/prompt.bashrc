@@ -4,8 +4,23 @@ READY="\001$(fgcolor 11)\002" # yellow
 CLEAN="\001$(fgcolor 30)\002" # green
 PATH_COLOR="$(fgcolor 75)" # blueish
 STATUS_OK=""
-STATUS_ERROR="\001$(fgcolor 202)\002☹ "
+STATUS_ERROR="\001$(fgcolor 202)\002\uf6f7"
 
+# kubectl context
+k8s_prompt() {
+    if hash kubectl 2>/dev/null; then
+        local glyph=$'\ufd31'
+        local context=$(kubectl config current-context)
+        local contextstatus=$CLEAN
+        if [[ $context == *"prod"* ]]; then
+            contextstatus=$READY
+        fi
+        printf "─⸨${contextstatus}${glyph} ${context}$PATH_COLOR⸩"
+    else
+        # no kubectl installed
+        printf ""
+    fi    
+}
 # git prompt
 git_prompt() {
     GIT_PS1_SHOWDIRTYSTATE=1
@@ -30,55 +45,57 @@ git_prompt() {
 
         local gitremote=""
         if [[ $git == *">"* ]]; then
-           gitremote="↑ "
+           gitremote="↑"
         fi
 
         if [[ $git == *"<"* ]]; then
-            gitremote="↓ "
+            gitremote="↓"
         fi
 
         if [[ $git == *"<>"* ]]; then
-            gitremote="⇅ "
+            gitremote="⇅"
         fi
         local gitstash=""
         if [[ $git == *"$"* ]]; then
-            gitstash="⚑ "
+            gitstash="⚑"
         fi
 
         IFS=' |=|<|>' read -ra array <<< "$git"
-        local gitbranch=${array[0]}
-
-         printf "${gitstatus}$gitbranch $gitremote$gitstash"
+        gitbranch="${array[0]##*/}"
+        local gitglyph=$'\uf7a1'         
+        #printf "${gitstatus}[${gitglyph} ${gitbranch:0:20}… $gitremote$gitstash]"
+        printf "─⸨${gitstatus}${gitglyph} $gitremote$gitstash ${gitbranch}$PATH_COLOR⸩"
 
     fi
 }
 
+path_icon() {
+    local glyph=$'\ue5ff' # regular folder
+    if [[ "${PWD}" == "${HOME}" ]]; then
+        glyph=$'\uf015'
+    elif [[ "$PWD}" == "${HOME}/projects/"* ]]; then
+        glyph=$'\ue5fb'
+    elif [[ "$PWD}" == "${HOME}/github/"* ]]; then
+        glyph=$'\ue5fd'
+    elif [[ "${PWD##/home/}" == "${PWD}" ]]; then
+        glyph=$'\ue5fc'
+    
+    fi
+    printf "${glyph}"
+}
+
 exit_symbol() {
-    if [ $? -gt 0 ]; then
-        EXIT="$STATUS_ERROR "
+    local code="$?"
+    if [ $code -gt 0 ]; then
+        EXIT="⸨$STATUS_ERROR $code$PATH_COLOR⸩"
     else
-        EXIT="$STATUS_OK "
-        # check if attached to minikube
-        if [[ "$DOCKER_CERT_PATH" == *"minikube"* ]]; then
-            EXIT="\001$(fgcolor 75)\002☸  "
-        fi
+        EXIT="⸨$(path_icon)⸩"
     fi
     printf "$EXIT"
 }
 
 prompt() {
-    local kubectx=""
-    if hash kubectl 2>/dev/null; then
-        kubectx="$(kubectl config current-context)"
-    fi
-    local prompt=
-   if [[ "$kubectx" == *"prod"* ]]; then
-        prompt="$DIRTY➤ "
-    else
-        prompt="➤ "
-    fi
-
-
+    local prompt="➤"
     printf "$prompt"
 
 }
@@ -89,7 +106,7 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 
-PS1='$(exit_symbol)$(git_prompt)\[$PATH_COLOR\]\W $(prompt) \[$NO_COLOUR\]'
+PS1='\[$PATH_COLOR\]┌─$(exit_symbol)$(k8s_prompt)\[$PATH_COLOR\]$(git_prompt)\n\[$PATH_COLOR\]└─⸨\w⸩─$(prompt) \[$NO_COLOUR\]'
 
 
 
