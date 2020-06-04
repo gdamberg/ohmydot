@@ -69,14 +69,15 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
+#ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git pyenv aws kubectl jump zsh-syntax-highlighting zsh-autosuggestions ibe jenv golang)
+plugins=(git jump kubectl)
+#zsh-syntax-highlighting zsh-autosuggestions ibe
 
 export IBE_HOME=$HOME/Source/itdev/ibe
 
@@ -116,7 +117,7 @@ function mkd() {
 }
 
 # create a pod with various debug tools available and open interactive shell inside it. deletes pod at exit
-function debug_pod() {
+function debug-pod() {
   kubectl run -i --rm --tty debug --image=praqma/network-multitool --restart=Never -- bash
 }
 alias ohmydot="code $HOME/.ohmydot"
@@ -130,5 +131,8 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/gordam/.sdkman"
-[[ -s "/home/gordam/.sdkman/bin/sdkman-init.sh" ]] && source "/home/gordam/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+[[ -s $HOME/.zshrc_local ]] && source "$HOME/.zshrc_local"
+

@@ -31,7 +31,7 @@ Proper install script TBD
 
 ### customization
 
-For local machine specific stuff put it in $HOME/.bashrc_local and $HOME/.gitconfig_local
+For local machine specific stuff put it in $HOME/.bashrc_local, $HOME/.zshrc_local and $HOME/.gitconfig_local
 
 ### Install stuff
 
@@ -41,6 +41,21 @@ sudo apt install ack apt-transport-https curl \
     gnome-tweaks jq meld source-highlight \
     stow tmux tree vim vim-doc vim-scripts \
     xclip
+```
+
+#### zsh 
+zsh usage is done for oh-my-zsh and powerlevel10k
+
+oh-my-zsh: https://github.com/ohmyzsh/ohmyzsh
+Install: 
+```
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+power10k prompt: https://github.com/romkatv/powerlevel10k
+Install: 
+```
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
 
 ### Fixes
