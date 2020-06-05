@@ -1,0 +1,89 @@
+# Create a new directory and enter it
+function mkd() {
+  mkdir -p "$@" && cd "$@"
+}
+
+
+# log all commands to .logs
+function log-history () {
+    if [[ $- = *i* ]] && (( EUID != 0 )); then
+        [[ -d ~/.logs ]] || mkdir ~/.logs
+        `echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $(history 1)" >> ~/.logs/bash-history-$(date "+%Y-%m-%d").log`
+    fi
+}
+
+# create a pod with various debug tools available and open interactive shell inside it. deletes pod at exit
+function debug-pod() {
+  kubectl run -i --rm --tty debug --image=praqma/network-multitool --restart=Never -- bash
+}
+
+# set color of text
+# used in strings with ech, eg: `echo -e "$(fgcolor 121)$(bgcolor 19)Hello world!"`
+# reset color after usage or it will mess up the prompt...
+function fgcolor() {
+  if [ ! -z "$1" ]
+  then
+    echo "$(tput setaf $1)"
+  fi
+}
+# set color of background
+function bgcolor() {
+  if [ ! -z "$1" ]
+  then
+    echo "$(tput setab $1)"
+  fi
+}
+
+function _colorgrid( ) {
+    iter=0
+    while [ $iter -lt 256 ]
+    do
+        # only print four columns in first row for astetic reasons"
+        if [[ $iter -gt 0 ]]
+        then
+            echo -en "$(tput setaf $iter)███ $iter     "
+            iter=$[$iter+1]
+            echo -en "$(tput setaf $iter)███ $iter     "
+            iter=$[$iter+1]
+        fi
+        echo -en "$(tput setaf $iter)███ $iter     "
+        iter=$[$iter+1]
+        echo -en "$(tput setaf $iter)███ $iter     "
+        iter=$[$iter+1]
+        echo -en "$(tput setaf $iter)███ $iter     "
+        iter=$[$iter+1]
+        echo -en "$(tput setaf $iter)███ $iter     "
+
+        iter=$[$iter+1]
+        echo -e $NO_COLOUR
+    done
+}
+
+function colors() {
+  _colorgrid | column -t
+}
+
+# Quickly navigate your filesystem from the command-line
+# From: http://jeroenjanssens.com/2013/08/16/quickly-navigate-your-filesystem-from-the-command-line.html
+export MARKPATH=$HOME/.marks
+function jump {
+    cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+function mark {
+    mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
+}
+function unmark {
+    rm -i "$MARKPATH/$1"
+}
+function marks {
+    ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
+}
+
+_completemarks() {
+  local curw=${COMP_WORDS[COMP_CWORD]}
+  local wordlist=$(find $MARKPATH -type l -printf "%f\n")
+  COMPREPLY=($(compgen -W '${wordlist[@]}' -- "$curw"))
+  return 0
+}
+
+complete -F _completemarks jump unmark§ 
