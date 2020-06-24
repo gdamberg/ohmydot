@@ -6,9 +6,6 @@ export EDITOR="code --wait"
 export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
 export LESS=' -R '
 
-# Tell grep to highlight matches
-export GREP_OPTIONS='—color=auto'
-
 # Don’t clear the screen after quitting a manual page.
 export MANPAGER='less -X';
 

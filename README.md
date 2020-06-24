@@ -29,6 +29,14 @@ stow zsh
 
 Proper install script TBD
 
+### python
+Install [pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv)
+
+```
+git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv
+```
+
 ### customization
 
 For local machine specific stuff put it in $HOME/.bashrc_local, $HOME/.zshrc_local and $HOME/.gitconfig_local
