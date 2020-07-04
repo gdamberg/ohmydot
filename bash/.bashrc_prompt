@@ -1,10 +1,10 @@
 # colors and stuff
-DIRTY="\001$(fgcolor 168)\002" # red
-READY="\001$(fgcolor 11)\002" # yellow
-CLEAN="\001$(fgcolor 30)\002" # green
+DIRTY="\001$(fgcolor 211)\002" # red
+READY="\001$(fgcolor 223)\002" # yellow
+CLEAN="\001$(fgcolor 72)\002" # green
 PATH_COLOR="$(fgcolor 75)" # blueish
 STATUS_OK=""
-STATUS_ERROR="\001$(fgcolor 202)\002\uf6f7"
+STATUS_ERROR="$(fgcolor 197)"
 
 # kubectl context
 k8s_prompt() {
@@ -30,6 +30,13 @@ git_prompt() {
     GIT_PS1_SHOWCOLORHINTS=0
     GIT_PS1_DESCRIBE_STYLE="branch"
     GIT_PS1_SHOWUPSTREAM="auto"
+
+    local max_length=20
+    local gitglyph='' 
+    #$'\uf7a1'
+    local startsymbol=''
+    local endsymbol=''
+
 
     local git=$(__git_ps1 "%s")
 
@@ -62,9 +69,13 @@ git_prompt() {
 
         IFS=' |=|<|>' read -ra array <<< "$git"
         gitbranch="${array[0]##*/}"
-        local gitglyph=$'\uf7a1'         
-        #printf "${gitstatus}[${gitglyph} ${gitbranch:0:20}… $gitremote$gitstash]"
-        printf "─⸨${gitstatus}${gitglyph} $gitremote$gitstash ${gitbranch}$PATH_COLOR⸩"
+
+        if (( ${#gitbranch} > ${max_length} )); then
+            gitbranch="${gitbranch:0:$max_length}…"
+        fi
+                 
+        printf "${gitstatus}${startsymbol}${gitglyph} ${gitbranch} $gitremote$gitstash${endsymbol}"
+        #printf "─⸨${gitstatus}${gitglyph} $gitremote$gitstash ${gitbranch}$PATH_COLOR⸩"
 
     fi
 }
@@ -85,17 +96,18 @@ path_icon() {
 }
 
 exit_symbol() {
-    local code="$?"
+    local code=$?
+    local exit=""
     if [ $code -gt 0 ]; then
-        EXIT="⸨$STATUS_ERROR $code$PATH_COLOR⸩"
+        exit="${STATUS_ERROR}☹  "
     else
-        EXIT="⸨$(path_icon)⸩"
+        exit="${STATUS_OK}"
     fi
-    printf "$EXIT"
+    printf "${exit}"
 }
 
 prompt() {
-    local prompt="➤"
+    local prompt="${NO_COLOUR}→ "
     printf "$prompt"
 
 }
@@ -106,9 +118,8 @@ if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
 fi
 
 
-PS1='\[$PATH_COLOR\]┌─$(exit_symbol)$(k8s_prompt)\[$PATH_COLOR\]$(git_prompt)\n\[$PATH_COLOR\]└─⸨\w⸩─$(prompt) \[$NO_COLOUR\]'
-
-
+#PS1='\[$PATH_COLOR\]┌─$(exit_symbol)$(k8s_prompt)\[$PATH_COLOR\]$(git_prompt)\n\[$PATH_COLOR\]└─⸨\w⸩─$(prompt) \[$NO_COLOUR\]'
+PS1='$(exit_symbol)${PATH_COLOR}\w $(git_prompt) $(k8s_prompt)\n$(prompt)$NO_COLOUR '
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
