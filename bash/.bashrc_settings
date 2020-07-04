@@ -68,10 +68,6 @@ export UNDERLINE="$(tput smul)"
 export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
-# gradle
-export PATH="$PATH:/opt/gradle/current/bin"
-# maven
-export PATH="$PATH:/opt/maven/current/bin"
-export M2_HOME=/opt/maven/current
-# groovy
-export PATH="$PATH:/opt/groovy/current/bin"
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US
+export LC_COLLATE=C
