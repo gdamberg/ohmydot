@@ -29,6 +29,5 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 #ohmydot
-alias dit='/usr/bin/git --git-dir=$HOME/.ohmydot/ --work-tree=$HOME'
-alias ohmydot='$EDITOR --new-window $HOME/.bashrc $HOME/.bashrc_* $HOME/.inputrc &'
+alias ohmydot='code --new-window $HOME/.ohmydot $HOME/.bashrc_local $HOME/.gitconfig_local &'
 alias reload='source $HOME/.bashrc'
