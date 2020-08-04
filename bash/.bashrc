@@ -31,9 +31,8 @@ if hash minikube 2>/dev/null; then
     source <(minikube completion bash)
 fi
 
-# code completion aws client
-if [ -e $HOME/.local/bin/aws_completer ]; then
-    complete -C '$HOME/.local/bin/aws_completer' aws
+if hash aws_completer 2>/dev/null; then
+  complete -C $(which aws_completer) aws
 fi
 
 # use dircolors if it exists
