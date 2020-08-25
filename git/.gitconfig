@@ -29,3 +29,6 @@
 
 [includeIf "gitdir:~/github/"]
     path = ~/.gitconfig_github
+
+[includeIf "gitdir:~/.ohmydot"]
+    path = ~/.gitconfig_github
