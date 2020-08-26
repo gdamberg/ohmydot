@@ -1,26 +1,25 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:$PATH
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/gordam/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -41,7 +40,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -69,20 +68,16 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-#ZSH_CUSTOM=$HOME/.oh-my-zsh-custom
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git jump kubectl)
-#zsh-syntax-highlighting zsh-autosuggestions ibe
-
-export IBE_HOME=$HOME/Source/itdev/ibe
+plugins=(git docker aws jump kubectl)
 
 source $ZSH/oh-my-zsh.sh
-autoload -U compinit && compinit
 
 # User configuration
 
@@ -110,29 +105,31 @@ autoload -U compinit && compinit
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias open='xdg-open &>/dev/null'
-alias clipboard="xclip -selection clipboard"
-function mkd() {
-  mkdir -p $1 && cd $1
-}
-
-# create a pod with various debug tools available and open interactive shell inside it. deletes pod at exit
-function debug-pod() {
-  kubectl run -i --rm --tty debug --image=praqma/network-multitool --restart=Never -- bash
-}
-alias ohmydot="code $HOME/.ohmydot"
-
+#powerlevel10k
+[[ ! -f /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme ]] || source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# golang
-export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+# python pyenv etc
+if [ -d "$HOME/.pyenv" ]; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$PYENV_ROOT/bin:$PATH"
+    # Pyenv (will add shims to front of $PATH)
+    eval "$(pyenv init -)"
 
+    # Ensure commands from virtualenvwrapper are available, no matter which
+    # Python version is active. This is equiv to sourcing virtualenvwrapper.sh
+    pyenv virtualenvwrapper
+    # Always require a virtualenv to use pip
+    export PIP_REQUIRE_VIRTUALENV=true
+fi
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+export SDKMAN_DIR="/Users/gordam/.sdkman"
+[[ -s "/Users/gordam/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/gordam/.sdkman/bin/sdkman-init.sh"
 
-[[ -s $HOME/.zshrc_local ]] && source "$HOME/.zshrc_local"
+# Created by `userpath` on 2020-08-12 18:57:22
+export PATH="$PATH:$HOME/.local/bin"
 
+# load local .zshrc overrides and additions if present
+[[ ! -f ~/.zshrc_local ]] || source ~/.zshrc_local

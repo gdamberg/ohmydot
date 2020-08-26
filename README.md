@@ -30,7 +30,7 @@ stow zsh
 Proper install script TBD
 
 ### python
-Install [pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](git clone https://github.com/pyenv/pyenv-virtualenv.git $(pyenv root)/plugins/pyenv-virtualenv)
+Install [pyenv](https://github.com/pyenv/pyenv) and [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv)
 
 ```
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
@@ -51,17 +51,17 @@ sudo apt install ack apt-transport-https curl \
     xclip
 ```
 
-#### zsh 
+#### zsh
 zsh usage is done for oh-my-zsh and powerlevel10k
 
 oh-my-zsh: https://github.com/ohmyzsh/ohmyzsh
-Install: 
+Install:
 ```
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
 
 power10k prompt: https://github.com/romkatv/powerlevel10k
-Install: 
+Install:
 ```
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 ```
