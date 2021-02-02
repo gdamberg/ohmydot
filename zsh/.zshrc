@@ -75,7 +75,8 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(docker aws jump kubectl bgnotify colored-man-pages colorize golang gradle helm history zsh_reload)
+plugins=(docker aws jump kubectl bgnotify colored-man-pages colorize golang gradle helm history zsh_reload ibe nvm yarn)
+export IBE_HOME=$HOME/Projects/itdev/ibe
 
 source $ZSH/oh-my-zsh.sh
 
