@@ -1,0 +1,1 @@
+LANG= command rm "${MARKPATH:-${HOME}/.marks}/$1"

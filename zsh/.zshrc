@@ -1,5 +1,5 @@
 # enable completions
-autoload -Uz compaudit compinit
+autoload -Uz compaudit compinit && compinit -du
 autoload -U bashcompinit && bashcompinit # support bash completions
 
 # History
@@ -100,7 +100,7 @@ unsetopt list_beep          # don't beep on ambiguous completions
 unsetopt local_options      # allow funcs to have their own setopts (i.e. don't change globally)
 unsetopt local_traps        # allow funcs to have their own signal trap opts (i.e. don't change globally)
 typeset -U PATH             # remove duplicate paths
-setopt autocd extendedglob nomatch notify
+setopt extendedglob nomatch notify
 bindkey -e
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
@@ -147,8 +147,10 @@ fpath=($HOME/.zsh/functions $HOME/.zsh/completions $fpath)
 # autoload custom functions
 autoload -U ${HOME}/.zsh/functions/*
 
-# source my alias files
-source ${HOME}/.zsh/alias
+# source my zsh files
+for myzsh ($HOME/.zsh/*.zsh); do
+  source $myzsh
+done
 
 # SDKMAN
 export SDKMAN_DIR="/Users/gordam/.sdkman"
