@@ -23,6 +23,7 @@
     slog = log --graph --pretty=\"format:%C(yellow)%h%Cred%d%Creset %s %C(white) %C(cyan)%an%Creset, %C(green)%ar%Creset\" -n 20
     outgoing = log --pretty=oneline --abbrev-commit --graph @{u}..
     incoming = !git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}
+    wip = for-each-ref --sort='authordate:iso8601' --format=' %(color:green)%(authordate:relative)%09%(color:white)%(refname:short)' refs/heads
 
 [include]
     path = ~/.gitconfig_local
