@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+function traverse_dir {
+  dir=$1
+
+  if [[ -d "$dir/.git" ]]; then
+    color="${YELLOW}"
+    cd "$dir"
+    branch="$(git branch | grep \* )"
+    status="$(git status)"
+    dirty=true
+    if [[ $status == *"nothing to commit, working tree clean"* ]]; then
+      dirty=false
+      color="${GREEN}"
+    fi
+
+    if [ $dirty == true ] || [ $showall == true ]; then
+      #echo -e "${color} --- $(pwd) \n   ${branch} - ${status##*$'\n'}${NC}"
+      echo -e "    - ${color}${dir}\n      ${branch}${NC}"
+    fi
+    cd ..
+  else
+    if [ ! "$(ls -A ${dir})" ]; then
+      continue
+    fi
+    cd $dir
+    echo "$dir"
+    for subdir in */
+    do
+      traverse_dir $subdir
+    done
+    cd ..
+  fi
+}
+
+showall=true
+if [ "$#" -ne 0 ] && [ "$1" == "--dirty" ]; then
+  showall=false
+fi
+
+for D in */
+do
+  traverse_dir $D
+done
