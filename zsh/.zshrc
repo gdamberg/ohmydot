@@ -109,10 +109,6 @@ bindkey -e
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-#powerlevel10k
-[[ ! -f /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme ]] || source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Environment variables
 export PAGER='less'
@@ -137,9 +133,9 @@ if [ -d "$HOME/.pyenv" ]; then
 
     # Ensure commands from virtualenvwrapper are available, no matter which
     # Python version is active. This is equiv to sourcing virtualenvwrapper.sh
-    pyenv virtualenvwrapper
+    #pyenv virtualenvwrapper
     # Always require a virtualenv to use pip
-    export PIP_REQUIRE_VIRTUALENV=true
+    #export PIP_REQUIRE_VIRTUALENV=true
 fi
 
 # add a function path
@@ -158,5 +154,13 @@ export SDKMAN_DIR="/Users/gordam/.sdkman"
 
 # load local .zshrc overrides and additions if present
 [[ ! -f ~/.zshrc_local ]] || source ~/.zshrc_local
+
+[[ ! -f $HOME/github/zsh-autosuggestions/zsh-autosuggestions.zsh ]] || source $HOME/github/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ ! -f $HOME/github/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] || source $HOME/github/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#[[ ! -f $HOME/github/zsh-history-substring-search/zsh-history-substring-search.zsh ]] || source $HOME/github/zsh-history-substring-search/zsh-history-substring-search.zsh
+[[ ! -f $HOME/github/powerlevel10k/powerlevel10k.zsh-theme ]] || source $HOME/github/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 compinit -du

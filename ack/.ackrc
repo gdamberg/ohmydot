@@ -3,6 +3,10 @@
 --ignore-file=match:\.iml$
 # Ignore vs-code files
 --ignore-dir=.history
+# ignore jars
+--ignore-file=match:\.jar$
+# ignore python venv
+--ignore-dir=.venv
 
 # Ignore maven stuff
 --ignore-dir=target
