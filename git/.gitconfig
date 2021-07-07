@@ -28,10 +28,14 @@
 [include]
     path = ~/.gitconfig_local
 
-[includeIf "gitdir:~/github/"]
+[includeIf "gitdir:~/Projects/github/"]
+    path = ~/.gitconfig_github
+
+[includeIf "gitdir:~/Projects/gdamberg/"]
     path = ~/.gitconfig_github
 
 [includeIf "gitdir:~/.ohmydot"]
     path = ~/.gitconfig_github
+    
 [pull]
 	rebase = false
