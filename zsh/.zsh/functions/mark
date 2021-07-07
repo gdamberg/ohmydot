@@ -1,8 +1,0 @@
-if [[ $# -eq 0 || "$1" = "." ]]; then
-	MARK=${PWD:t}
-else
-	MARK="$1"
-fi
-
-command mkdir -p "${MARKPATH:-${HOME}/.marks}"
-command ln -sfn "$PWD" "${MARKPATH:-${HOME}/.marks}/$MARK"
