@@ -33,9 +33,6 @@
 
 [includeIf "gitdir:~/Projects/gdamberg/"]
     path = ~/.gitconfig_github
-
-[includeIf "gitdir:~/.ohmydot"]
-    path = ~/.gitconfig_github
     
 [pull]
 	rebase = false

@@ -1,0 +1,24 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- create:
+    - ~/bin
+    - ~/.vim
+    - ~/.zprezto-contrib
+- link:
+    ~/.ackrc: ackrc
+    ~/.gitconfig: gitconfig
+    ~/.gitconfig_github: gitconfig_github
+    ~/.gitignore_global: gitignore_global
+    ~/.vim/vimrc: vimrc
+    ~/.zshrc: zshrc
+    ~/.zlogin: zlogin
+    ~/.zlogout: zlogout
+    ~/.zpreztorc: zpreztorc
+    ~/.zprofile: zprofile
+    ~/.zshenv: zshenv
+    ~/.p10k.zsh: p10k.zsh
+    ~/bin/fgit: bin/fgit
