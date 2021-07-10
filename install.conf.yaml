@@ -9,16 +9,16 @@
     - ~/.vim
     - ~/.zprezto-contrib
 - link:
-    ~/.ackrc: ackrc
-    ~/.gitconfig: gitconfig
-    ~/.gitconfig_github: gitconfig_github
-    ~/.gitignore_global: gitignore_global
-    ~/.vim/vimrc: vimrc
-    ~/.zshrc: zshrc
-    ~/.zlogin: zlogin
-    ~/.zlogout: zlogout
-    ~/.zpreztorc: zpreztorc
-    ~/.zprofile: zprofile
-    ~/.zshenv: zshenv
-    ~/.p10k.zsh: p10k.zsh
+    ~/.ackrc: dotfiles/ackrc
+    ~/.gitconfig: dotfiles/gitconfig
+    ~/.gitconfig_github: dotfiles/gitconfig_github
+    ~/.gitignore_global: dotfiles/gitignore_global
+    ~/.vim/vimrc: dotfiles/vimrc
+    ~/.zshrc: dotfiles/zshrc
+    ~/.zlogin: dotfiles/zlogin
+    ~/.zlogout: dotfiles/zlogout
+    ~/.zpreztorc: dotfiles/zpreztorc
+    ~/.zprofile: dotfiles/zprofile
+    ~/.zshenv: dotfiles/zshenv
+    ~/.p10k.zsh: dotfiles/p10k.zsh
     ~/bin/fgit: bin/fgit
