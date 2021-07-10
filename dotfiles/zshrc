@@ -12,3 +12,17 @@ fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Load compinit again as I can't get my-completions working :-(
+compinit -u
+
+# alias
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+#ohmydot
+alias ohmydot='code --new-window $HOME/Projects/gdamberg/ohmydot &'
+
+alias k='kubectl'
