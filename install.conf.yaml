@@ -22,3 +22,4 @@
     ~/.zshenv: dotfiles/zshenv
     ~/.p10k.zsh: dotfiles/p10k.zsh
     ~/bin/fgit: bin/fgit
+    ~/.zprezto-contrib/my-completions: modules/my-completions
